@@ -1,34 +1,28 @@
 pipeline {
   agent any
   stages {
-    stage('log tool versions') {
-      parallel {
-        stage('log tool versions') {
-          steps {
-            sh '''mvn --version
-git --version
-java -version'''
-          }
-        }
-
-        stage('check for pom') {
-          steps {
-            fileExists 'pom.xml'
-          }
-        }
-
+    stage('Build') {
+      steps {
+        sh 'mvn compile'
+        fileExists 'pom.xml'
       }
     }
 
-    stage('Build with Maven') {
+    stage('Test') {
       steps {
-        sh 'mvn compile test package'
+        sh 'mvn clean test'
       }
     }
 
-    stage('post build steps') {
+    stage('Deploy') {
       steps {
-        writeFile(file: 'status.txt', text: 'hey it worked')
+        sh 'mvn package'
+      }
+    }
+
+    stage('Archive') {
+      steps {
+        archiveArtifacts '**/target/spock-lizard-1.0.jar'
       }
     }
 
