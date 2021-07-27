@@ -5,7 +5,7 @@
 
 	<groupId>com.mcnz.rps.spring</groupId>
 	<artifactId>spock-lizard</artifactId>
-<version>1.2.${v}-SNAPSHOT</version>
+<version>1.1</version>
 	<packaging>jar</packaging>
 
 	<name>spock-lizard</name>
@@ -48,6 +48,10 @@
 	</dependencies>
 
 	<build>
+		
+		            <finalName>${project.name}##${project.version}.${BUILD_NUMBER}</finalName>
+
+		
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
