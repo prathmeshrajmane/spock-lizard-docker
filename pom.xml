@@ -5,7 +5,7 @@
 
 	<groupId>com.mcnz.rps.spring</groupId>
 	<artifactId>spock-lizard</artifactId>
-<version>${BUILD_NUMBER}.0</version>
+<version>${BUILD_NUMBER}</version>
 	<packaging>jar</packaging>
 
 	<name>spock-lizard</name>
