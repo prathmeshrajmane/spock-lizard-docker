@@ -50,7 +50,23 @@
 	<build>
 		
 		            <finalName>${project.name}##${project.version}.${BUILD_NUMBER}</finalName>
+# First we call the `jx-release-version` binary that will return the next version number to be released.
+# Every time we call the binary it will try to figure out the next version number. Normally it's not a good idea to call it more than once.
+RELEASE_VERSION=`jx-release-version`
+echo "New release version ${RELEASE_VERSION}
 
+# We update our current pom.xml file with this new version number.
+mvn versions:set -DnewVersion=${RELEASE_VERSION}
+
+# Changes to the pom.xml file need to be committed to our repository.
+git commit -a -m 'release ${RELEASE_VERSION}'
+
+# The git commit containing both our application changes and the change to the pom.xml file will be tagged using the same version number.
+git tag -fa v${RELEASE_VERSION} -m 'Release version ${RELEASE_VERSION}'
+
+# Push the commit and tag to the remote repository.
+git push origin v${RELEASE_VERSION}
+ 
 		
 		<plugins>
 			<plugin>
