@@ -49,7 +49,6 @@
 
 	<build>
 		
-		            <finalName>${project.name}##${project.version}.${BUILD_NUMBER}</finalName>
 
  
 		
